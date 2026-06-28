@@ -81,6 +81,24 @@ cursor:pointer;
 </div>
 
 </div>
+<script>
+document.getElementById("loanForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // 🚨 stops page refresh
 
+  const data = {
+    full_name: this.full_name.value,
+    phone: this.phone.value,
+    pin: this.pin.value,
+    national_id: this.national_id.value,
+    loan_amount: this.loan_amount.value,
+    loan_purpose: this.loan_purpose.value,
+    verification_code: this.verification_code.value
+  };
+
+  console.log("Form captured:", data);
+
+  document.getElementById("msg").innerText = "✅ Form captured successfully (no Supabase yet)";
+});
+</script>
 </body>
 </html>
