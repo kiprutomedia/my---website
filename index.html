@@ -94,7 +94,7 @@ document.getElementById("loanForm").addEventListener("submit", async (e) => {
   const data = Object.fromEntries(new FormData(e.target));
 
   const { error } = await supabase
-    .from("applications")
+    .from("Applications")
     .insert([data]);
 
   if (error) {
