@@ -1,30 +1,52 @@
-<script type="module">
-import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>African FastCash Loans</title>
 
-const supabase = createClient(
-  "https://irmqjizwqvsbfextuxtr.supabase.co",
-  "sb_publishable_lGyCvb--uFKzYJXSC_WJow_Kjul-Dk3"
-);
+<style>
+body{
+font-family:Arial;
+margin:0;
+background:#f4f4f4;
+}
+header{
+background:#0b5ed7;
+color:white;
+padding:20px;
+text-align:center;
+}
+.container{
+max-width:800px;
+margin:auto;
+padding:20px;
+}
+.card{
+background:white;
+padding:20px;
+border-radius:10px;
+margin-top:20px;
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+</style>
+</head>
 
-document.getElementById("loanForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
+<body>
 
-  const data = Object.fromEntries(new FormData(e.target));
+<header>
+<h2>African FastCash Loans</h2>
+<p>Site is working ✔</p>
+</header>
 
-  console.log("Sending data:", data);
+<div class="container">
 
-  const res = await supabase
-    .from("Applications")
-    .insert([data]);
+<div class="card">
+<h3>Test Page</h3>
+<p>If you can see this, your Vercel deployment is working correctly.</p>
+</div>
 
-  console.log("Supabase response:", res);
+</div>
 
-  if (res.error) {
-    alert("ERROR: " + res.error.message);
-    console.log(res.error);
-  } else {
-    alert("SUCCESS");
-    e.target.reset();
-  }
-});
-</script>
+</body>
+</html>
