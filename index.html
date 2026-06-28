@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>African Development FastCash Loans</title>
+<title>African FastCash Loans</title>
+
 <style>
 body{
 font-family:Arial,sans-serif;
@@ -19,42 +20,25 @@ padding:20px;
 text-align:center;
 }
 .hero{
-padding:50px 20px;
+padding:40px 20px;
 text-align:center;
 background:white;
 }
-.hero h1{
-font-size:36px;
-}
-.hero p{
-font-size:18px;
-}
-.btn{
-display:inline-block;
-padding:15px 30px;
-background:#28a745;
-color:white;
-text-decoration:none;
-border-radius:8px;
-margin-top:20px;
-font-weight:bold;
-}
 .section{
-padding:40px 20px;
+padding:30px 20px;
 max-width:900px;
 margin:auto;
 }
 .card{
 background:white;
 padding:20px;
-margin:15px 0;
 border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,.1);
+box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 input,select,textarea{
 width:100%;
 padding:12px;
-margin:10px 0;
+margin:8px 0;
 border:1px solid #ccc;
 border-radius:6px;
 }
@@ -68,89 +52,84 @@ border-radius:6px;
 font-size:16px;
 cursor:pointer;
 }
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-}
 </style>
+
 </head>
 
 <body>
 
 <header>
-<h2>African Development FastCash Loans</h2>
+<h2>African FastCash Loans</h2>
 <p>Fast • Secure • Reliable Loans</p>
 </header>
 
 <section class="hero">
-<h1>Need Money Fast?</h1>
-<p>Apply online in minutes and receive a quick response.</p>
-<a href="#apply" class="btn">Apply Now</a>
+<h1>Apply for a Loan Online</h1>
+<p>Fill the form below to apply instantly</p>
 </section>
 
 <section class="section">
 <div class="card">
-<h2>Why Choose Us?</h2>
-<ul>
-<li>✔ Quick application process</li>
-<li>✔ Secure handling of your information</li>
-<li>✔ Transparent loan terms</li>
-<li>✔ Friendly customer support</li>
-</ul>
-</div>
 
-<div class="card">
-<h2>Loan Services</h2>
-<ul>
-<li>Personal Loans</li>
-<li>Business Loans</li>
-<li>Emergency Loans</li>
-<li>Education Loans</li>
-</ul>
-</div>
-</section>
+<h2>Loan Application</h2>
 
-<section class="section" id="apply">
-<div class="card">
-<h2>Online Loan Application</h2>
+<form id="loanForm">
 
-<form>
-<input type="text" placeholder="Full Name" required>
+<input name="full_name" type="text" placeholder="Full Name" required>
 
-<input type="tel" placeholder="Phone Number" required>
+<input name="phone" type="tel" placeholder="Phone Number" required>
 
-<input type="email" placeholder="Email (Optional)">
+<input name="email" type="email" placeholder="Email (Optional)">
 
-<input type="text" placeholder="National ID Number" required>
+<input name="national_id" type="text" placeholder="National ID" required>
 
-<input type="number" placeholder="Loan Amount Required" required>
+<input name="loan_amount" type="number" placeholder="Loan Amount" required>
 
-<select required>
-<option>Select Loan Purpose</option>
+<select name="loan_purpose" required>
+<option value="">Select Purpose</option>
 <option>Business</option>
 <option>Education</option>
 <option>Medical</option>
 <option>Personal</option>
-<option>Other</option>
 </select>
 
-<textarea rows="5" placeholder="Additional Information"></textarea>
+<textarea name="additional_info" placeholder="Additional Info"></textarea>
 
 <button type="submit">Submit Application</button>
 
+</form>
 
-<form id="loanForm">
+<p id="msg"></p>
+
 </div>
 </section>
 
-<footer>
-© 2026 African Development FastCash Loans. All Rights Reserved.
-</footer>
-<script>
-alert("JS is working");
+<script type="module">
+import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+const supabase = createClient(
+  "https://irmqjizwqvsbfextuxtr.supabase.co",
+  "sb_publishable_lGyCvb--uFKzYJXSC_WJow_Kjul-Dk3"
+);
+
+document.getElementById("loanForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = Object.fromEntries(new FormData(e.target));
+
+  const { error } = await supabase
+    .from("applications")
+    .insert([data]);
+
+  if (error) {
+    console.log(error);
+    document.getElementById("msg").innerText = "❌ Failed to submit";
+  } else {
+    document.getElementById("msg").innerText = "✅ Application submitted!";
+    e.target.reset();
+  }
+});
 </script>
+
 </body>
 </html>
