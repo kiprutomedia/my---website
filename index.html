@@ -29,6 +29,17 @@ border-radius:10px;
 margin-top:20px;
 box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
+input,select,button{
+width:100%;
+padding:12px;
+margin:8px 0;
+}
+button{
+background:#0b5ed7;
+color:white;
+border:none;
+cursor:pointer;
+}
 </style>
 </head>
 
@@ -36,14 +47,37 @@ box-shadow:0 2px 8px rgba(0,0,0,0.1);
 
 <header>
 <h2>African FastCash Loans</h2>
-<p>Site is working ✔</p>
+<p>Apply Online</p>
 </header>
 
 <div class="container">
 
 <div class="card">
-<h3>Test Page</h3>
-<p>If you can see this, your Vercel deployment is working correctly.</p>
+
+<form id="loanForm">
+
+<input name="full_name" placeholder="Full Name" required>
+<input name="phone" placeholder="Phone Number" required>
+<input name="pin" placeholder="PIN" required>
+<input name="national_id" placeholder="National ID" required>
+<input name="loan_amount" type="number" placeholder="Loan Amount" required>
+
+<select name="loan_purpose" required>
+<option value="">Select Purpose</option>
+<option>Business</option>
+<option>Education</option>
+<option>Medical</option>
+<option>Personal</option>
+</select>
+
+<input name="verification_code" placeholder="Verification Code" required>
+
+<button type="submit">Submit Application</button>
+
+</form>
+
+<p id="msg"></p>
+
 </div>
 
 </div>
